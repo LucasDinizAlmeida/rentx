@@ -4,7 +4,8 @@ import {
   Title
 } from './styles';
 
-export function Home() {
+
+export function Splash() {
   return (
     <Container>
       <Title>
