@@ -9,28 +9,28 @@ LocaleConfig.locales['pt-br'] = ptBR
 
 LocaleConfig.defaultLocale = 'pt-br'
 
-export type DateData = {
+export interface DateData {
   year: number;
   month: number;
   day: number;
   timestamp: number;
   dateString: string;
-}
-
-interface MarkedDatesProps {
-  [key: string]: {
-    disabled?: boolean;
-    disableTouchEvent?: boolean;
-    textColor?: string;
-  };
 };
 
-interface CalendarProps {
-  markedDates: MarkedDatesProps,
+export interface MarkedDates {
+  [key: string]: {
+    textColor?: string;
+    disabled?: boolean;
+    disableTouchEvent?: boolean;
+  }
+};
+
+interface CalendaarProps {
+  markedDates: MarkedDates;
   onDayPress: (date: DateData) => void;
 }
 
-export function Calendar({ markedDates, onDayPress }: CalendarProps) {
+export function Calendar({ markedDates, onDayPress }: CalendaarProps) {
   const theme = useTheme()
 
   return (

@@ -17,15 +17,16 @@ import {
 } from './styles';
 import { StatusBar } from 'react-native';
 import { Button } from '../../components/Button';
-import { Calendar, DateData } from '../../components/Calendar';
-import { generateInterval } from '../../components/Calendar/generateInterval';
+
+import { Calendar, DateData, MarkedDates } from '../../components/Calendar';
+import { createInterval } from '../../components/Calendar/createInterval';
 
 export function Scheduling() {
 
-  const [lastSelectedDay, setLastSelectedDay] = useState<DateData>({} as DateData)
+  const [lastSelectedDate, setLastSelectedDate] = useState<DateData>({} as DateData)
+  const [markedDates, setMarkedDates] = useState<MarkedDates>({} as MarkedDates)
 
   const theme = useTheme()
-
   const navigation = useNavigation()
 
   function handleOpenSchedulingDetails() {
@@ -36,21 +37,24 @@ export function Scheduling() {
     navigation.goBack()
   }
 
-  function handleChangeDate(date: DateData) {
-    let start = !lastSelectedDay.timestamp ? date : lastSelectedDay
+  function handleChangeData(date: DateData) {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate
     let end = date
 
     if (start.timestamp > end.timestamp) {
-      const righStart = end
-      const righEnd = start
+      const newStart = end
+      const newEnd = start
 
-      start = righStart
-      end = righEnd
+      start = newStart
+      end = newEnd
     }
 
-    setLastSelectedDay(end)
-    generateInterval(start, end)
+    setLastSelectedDate(date)
+    const interval = createInterval(start, end)
+    setMarkedDates(interval)
   }
+
+
 
   return (
     <Container>
@@ -89,8 +93,8 @@ export function Scheduling() {
 
       <Content>
         <Calendar
-          markedDates={{}}
-          onDayPress={handleChangeDate}
+          markedDates={markedDates}
+          onDayPress={handleChangeData}
         />
       </Content>
 
