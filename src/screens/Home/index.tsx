@@ -18,6 +18,7 @@ import {
 } from './styles';
 import { api } from '../../services/api';
 import { Load } from '../../components/Load';
+import { MyCarsButton } from '../../components/MyCarsButton';
 
 const carList = [
   {
@@ -52,6 +53,10 @@ export function Home() {
 
   function handleCarDetails(car: CarDTO) {
     navigation.navigate('CarDetails', { car })
+  }
+
+  function handleOpenMyCars() {
+    navigation.navigate('MyCars')
   }
 
   useEffect(() => {
@@ -104,6 +109,9 @@ export function Home() {
             renderItem={({ item }) => <Car data={item} onPress={() => handleCarDetails(item)} />}
           />
       }
+      <MyCarsButton
+        onPress={handleOpenMyCars}
+      />
     </Container>
   );
 }

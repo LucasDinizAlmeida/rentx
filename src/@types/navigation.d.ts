@@ -7,9 +7,17 @@ export declare global {
       CarDetails: {
         car: CarDTO
       },
-      Scheduling: undefined,
+      Scheduling: {
+        car: CarDTO
+      },
+      SchedulingDetails: {
+        car: CarDTO;
+        startFormatted: string;
+        endFormatted: string;
+        dates: string[];
+      },
       SchedulingComplete: undefined,
-      SchedulingDetails: undefined
+      MyCars: undefined,
     }
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useTheme } from 'styled-components';
 import { BackButton } from '../../components/BackButton';
@@ -15,23 +15,49 @@ import {
   Footer,
   Content
 } from './styles';
-import { StatusBar } from 'react-native';
+import { StatusBar, Alert } from 'react-native';
 import { Button } from '../../components/Button';
 
 import { Calendar, DateData, MarkedDates } from '../../components/Calendar';
 import { createInterval } from '../../components/Calendar/createInterval';
+import { format } from 'date-fns';
+import { ajustDate } from '../../utils/ajustDate';
+import { CarDTO } from '../../dtos/CarDTO';
+
+interface RentalIntervalProps {
+  startFormatted: string;
+  endFormatted: string;
+  dates: string[];
+}
+
+export interface Params {
+  car: CarDTO
+}
 
 export function Scheduling() {
 
   const [lastSelectedDate, setLastSelectedDate] = useState<DateData>({} as DateData)
   const [markedDates, setMarkedDates] = useState<MarkedDates>({} as MarkedDates)
+  const [rentalInterval, setRentalInterval] = useState<RentalIntervalProps>({} as RentalIntervalProps)
+
+  const route = useRoute()
+  const { car } = route.params as Params
 
   const theme = useTheme()
   const navigation = useNavigation()
 
   function handleOpenSchedulingDetails() {
-    navigation.navigate('SchedulingDetails')
+
+    navigation.navigate('SchedulingDetails', {
+      car,
+      startFormatted: rentalInterval.startFormatted,
+      endFormatted: rentalInterval.endFormatted,
+      dates: rentalInterval.dates
+    })
+
+
   }
+
 
   function handleGoback() {
     navigation.goBack()
@@ -52,6 +78,18 @@ export function Scheduling() {
     setLastSelectedDate(date)
     const interval = createInterval(start, end)
     setMarkedDates(interval)
+
+    const firstDate = Object.values(interval)[0]
+    const lastDate = Object.values(interval)[Object.values(interval).length - 1]
+
+    const startFormatted = format(ajustDate(new Date(firstDate.timestamp)), 'dd/MM/yyyy')
+    const endFormatted = format(ajustDate(new Date(lastDate.timestamp)), 'dd/MM/yyyy')
+
+    setRentalInterval({
+      startFormatted,
+      endFormatted,
+      dates: Object.keys(interval)
+    })
   }
 
 
@@ -75,8 +113,8 @@ export function Scheduling() {
         <RentalPeriod>
           <DateInfo>
             <DateTitle>De</DateTitle>
-            <DateValue selected={false}>
-              19/10/2022
+            <DateValue selected={!!rentalInterval.startFormatted}>
+              {rentalInterval.startFormatted}
             </DateValue>
           </DateInfo>
 
@@ -84,8 +122,8 @@ export function Scheduling() {
 
           <DateInfo>
             <DateTitle>Até</DateTitle>
-            <DateValue selected={false}>
-              19/10/2022
+            <DateValue selected={!!rentalInterval.startFormatted}>
+              {rentalInterval.endFormatted}
             </DateValue>
           </DateInfo>
         </RentalPeriod>
@@ -99,7 +137,11 @@ export function Scheduling() {
       </Content>
 
       <Footer>
-        <Button title='Confirmar' onPress={handleOpenSchedulingDetails} />
+        <Button
+          title='Confirmar'
+          enabled={!!rentalInterval.startFormatted}
+          onPress={handleOpenSchedulingDetails}
+        />
       </Footer>
 
     </Container>

@@ -2,13 +2,14 @@ import { DateData } from "../../components/Calendar";
 import { addDays, eachDayOfInterval, format } from 'date-fns'
 import { MarkedDates } from './'
 import theme from '../../styles/theme'
+import { ajustDate } from '../../utils/ajustDate'
 
 
 
 
-function ajustDate(date: Date) {
-  return addDays(date, 1)
-}
+// export function ajustDate(date: Date) {
+//   return addDays(date, 1)
+// }
 
 export function createInterval(start: DateData, end: DateData) {
 
@@ -23,7 +24,8 @@ export function createInterval(start: DateData, end: DateData) {
     interval = {
       ...interval,
       [date]: {
-        textColor: theme.colors.main
+        textColor: theme.colors.main,
+        timestamp: item
       }
     }
   })

@@ -39,7 +39,7 @@ export function CarDetails() {
 
 
   function handleOpenScheduling() {
-    navigation.navigate('Scheduling')
+    navigation.navigate('Scheduling', { car })
   }
 
   function handleGoback() {

@@ -22,6 +22,7 @@ export interface MarkedDates {
     textColor?: string;
     disabled?: boolean;
     disableTouchEvent?: boolean;
+    timestamp?: Date;
   }
 };
 
