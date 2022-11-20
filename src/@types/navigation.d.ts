@@ -4,6 +4,7 @@ export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       Home: undefined,
+      Splash: undefined,
       CarDetails: {
         car: CarDTO
       },

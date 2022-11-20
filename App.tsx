@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ThemeProvider } from 'styled-components'
 import theme from './src/styles/theme'
+import * as SplashScreen from 'expo-splash-screen';
 
 import {
   useFonts,
@@ -14,8 +15,10 @@ import {
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo'
 
-import { Splash } from './src/screens/Splash';
 import { Routes } from './src/routes';
+import { AuthContextProvider } from './src/hooks/AuthContext';
+
+// SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 
@@ -28,12 +31,15 @@ export default function App() {
   })
 
   if (!fontsLoaded) {
-    return <Splash />
+    return
   }
+
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <AuthContextProvider>
+        <Routes />
+      </AuthContextProvider>
     </ThemeProvider>
   )
 }

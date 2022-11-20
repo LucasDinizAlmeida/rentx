@@ -24,6 +24,7 @@ import {
 import { BackButton } from '../../components/BackButton';
 import { Car } from '../../components/Car';
 import { Load } from '../../components/Load';
+import { LoadCar } from '../../components/LoadCar';
 
 interface fetchCarsProps {
   id: string;
@@ -80,7 +81,7 @@ export function MyCars() {
       </Header>
       {
         isLoaded ?
-          <Load />
+          <LoadCar />
           :
           <Content>
             <Appointments>
