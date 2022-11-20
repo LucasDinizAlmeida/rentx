@@ -27,7 +27,7 @@ Aplicativo de alugue de carros. Tecnologias utilizadas React-Native, Expo SDK, t
 
    <ul> 
     <li><b>Clonar o repositório na pasta desejada:</li></b>
-    <code> git clone git@github.com:LucasDinizAlmeida/gofinances.git</code>
+    <code> git clone git@github.com:LucasDinizAlmeida/rentx.git</code>
    </ul>
    <ul> 
     <li><b>Instalar bibliotecas do projeto utilizando o comando:</li></b>
