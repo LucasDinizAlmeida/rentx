@@ -6,6 +6,10 @@ interface ContainerProps {
   color?: string
 }
 
+interface ButtonTitleProps {
+  light: boolean;
+}
+
 export const Container = styled(RectButton) <ContainerProps>`
   width: 100%;
   align-items: center;
@@ -16,8 +20,8 @@ export const Container = styled(RectButton) <ContainerProps>`
   padding: 19px 0;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text<ButtonTitleProps>`
   font-family: ${({ theme }) => theme.fonts.primary_500};
-  color: ${({ theme }) => theme.colors.line};;
+  color: ${({ theme, light }) => light ? theme.colors.header : theme.colors.line};;
   font-size: ${RFValue(15)}px;
 `

@@ -8,6 +8,7 @@ import { Scheduling } from '../screens/Scheduling';
 import { SchedulingComplete } from '../screens/SchedulingComplete';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { MyCars } from '../screens/MyCars';
+import { SignInIgnite } from "../screens/SignInIgnite";
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -19,8 +20,8 @@ export function StackRoutes() {
     }}
     >
       <Screen
-        name="Splash"
-        component={Splash}
+        name="SignInIgnite"
+        component={SignInIgnite}
       />
       <Screen
         name="Home"

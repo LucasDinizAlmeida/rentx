@@ -6,16 +6,16 @@ import { AuthRoutes } from './auth.routes';
 
 export function Routes() {
 
-  const { user } = useAuthContext()
+  // const { user } = useAuthContext()
 
-  if (!user.id) {
+  // if (!user.id) {
 
-    return (
-      <NavigationContainer>
-        <AuthRoutes />
-      </NavigationContainer>
-    )
-  }
+  //   return (
+  //     <NavigationContainer>
+  //       <AuthRoutes />
+  //     </NavigationContainer>
+  //   )
+  // }
 
   return (
     <NavigationContainer>
